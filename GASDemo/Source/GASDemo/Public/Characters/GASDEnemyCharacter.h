@@ -18,6 +18,8 @@ class GASDEMO_API AGASDEnemyCharacter : public AGASDBaseCharacter, public IEnemy
 public:
 	AGASDEnemyCharacter();
 
+public:
+	// Enemy Interface method
 	virtual void Highlight() override;
 	virtual void Unhighlight() override;
 

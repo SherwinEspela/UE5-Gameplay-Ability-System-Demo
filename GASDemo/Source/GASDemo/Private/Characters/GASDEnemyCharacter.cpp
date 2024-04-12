@@ -13,13 +13,18 @@ AGASDEnemyCharacter::AGASDEnemyCharacter()
 
 	AbilitySystemComponent = CreateDefaultSubobject<UGASDAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UGASDAttributeSet>(TEXT("AttributeSet"));
 }
 
 void AGASDEnemyCharacter::BeginPlay()
 {
+	Super::BeginPlay();
+
 	GetMesh()->SetCustomDepthStencilValue(CUSTOM_HIGHLIGHT_RED);
+
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 }
 
 void AGASDEnemyCharacter::Highlight()

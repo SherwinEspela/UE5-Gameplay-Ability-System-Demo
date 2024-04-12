@@ -20,10 +20,16 @@ class GASDEMO_API AGASDPlayerCharacter : public AGASDBaseCharacter
 public:
 	AGASDPlayerCharacter();
 
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
 protected:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USpringArmComponent> SpringArm;
 
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UCameraComponent> Camera;
+
+private:
+	void InitAbilityActorInfo();
 };

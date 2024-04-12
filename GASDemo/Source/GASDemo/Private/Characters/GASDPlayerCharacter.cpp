@@ -2,6 +2,9 @@
 
 
 #include "Characters/GASDPlayerCharacter.h"
+#include "PlayerController/GASDPlayerState.h"
+#include "AbilitySystem/GASDAbilitySystemComponent.h"
+
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -32,4 +35,26 @@ AGASDPlayerCharacter::AGASDPlayerCharacter()
 	SpringArm->bInheritPitch = false;
 	SpringArm->bInheritYaw = false;
 	SpringArm->bInheritRoll = false;
+}
+
+void AGASDPlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	InitAbilityActorInfo();
+}
+
+void AGASDPlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	InitAbilityActorInfo();
+}
+
+void AGASDPlayerCharacter::InitAbilityActorInfo()
+{
+	// Server - init ability actor info
+	AGASDPlayerState* GASDPlayerState = GetPlayerState<AGASDPlayerState>();
+	check(GASDPlayerState);
+	GASDPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(GASDPlayerState, this);
+	AbilitySystemComponent = GASDPlayerState->GetAbilitySystemComponent();
+	AttributeSet = GASDPlayerState->GetAttributSet();
 }

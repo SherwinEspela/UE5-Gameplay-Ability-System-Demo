@@ -9,6 +9,11 @@ AGASDBaseCharacter::AGASDBaseCharacter()
 
 }
 
+UAbilitySystemComponent* AGASDBaseCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void AGASDBaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();

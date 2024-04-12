@@ -18,6 +18,9 @@ class GASDEMO_API AGASDBaseCharacter : public ACharacter, public IAbilitySystemI
 public:
 	AGASDBaseCharacter();
 
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	FORCEINLINE UAttributeSet* GetAttributSet() const { return AttributeSet; }
+
 protected:
 	virtual void BeginPlay() override;
 
