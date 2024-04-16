@@ -4,7 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "AbilitySystemComponent.h"
 #include "GASDAttributeSet.generated.h"
+
+#define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
+ GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
+ GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+ GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+ GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 /**
  * 
@@ -19,6 +26,8 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
 
+public:
+	// Attribute properties
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
 	FGameplayAttributeData Health;
 
@@ -31,6 +40,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxMana, Category = "Vital Attributes")
 	FGameplayAttributeData MaxMana;
 
+public:
+	// Attribute replication functions
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
 
@@ -42,4 +53,12 @@ public:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
+public:
+	// Register Attribute accessors here
+	ATTRIBUTE_ACCESSORS(UGASDAttributeSet, Health);
+	ATTRIBUTE_ACCESSORS(UGASDAttributeSet, MaxHealth);
+	ATTRIBUTE_ACCESSORS(UGASDAttributeSet, Mana);
+	ATTRIBUTE_ACCESSORS(UGASDAttributeSet, MaxMana);
+
 };

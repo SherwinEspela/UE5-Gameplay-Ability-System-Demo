@@ -2,12 +2,14 @@
 
 
 #include "AbilitySystem/GASDAttributeSet.h"
-#include "AbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
 
 UGASDAttributeSet::UGASDAttributeSet()
 {
-
+	InitHealth(100.f);
+	InitMaxHealth(100.f);
+	InitMana(100.f);
+	InitMaxMana(100.f);
 }
 
 void UGASDAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
