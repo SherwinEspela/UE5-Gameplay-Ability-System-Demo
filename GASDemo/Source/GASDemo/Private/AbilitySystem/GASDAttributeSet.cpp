@@ -6,6 +6,10 @@
 
 UGASDAttributeSet::UGASDAttributeSet()
 {
+	// Initializing values for attributes
+	// this can be checked in the editor by
+	// entering the "showdebug abilitysytem"
+	// console command
 	InitHealth(100.f);
 	InitMaxHealth(100.f);
 	InitMana(100.f);
